@@ -1,0 +1,52 @@
+<h2>User info</h2>
+<div>
+  <h3><%= @user.name %></h3>
+  <p><%= link_to "プロフィール編集", edit_user</p>
+</div>
+
+<% @books.each do |book| %>
+<div>
+  <%= link_to book_path(book.id) do %>
+  <% end %>
+
+  <p>Title:<%= book.title %></p>
+  <p>Opinion:<%= book.body %></p>
+  <p>User:<%= book.user.name</p>
+
+  </div>
+<% end %>
+
+<h2>New book</h2>
+<% if @book.errors.any? %>
+<%= @book.errors.count %> errors prohibited this book form being saved:
+<ul>
+  <% @book.errors.full_messages.each do |message| %>
+  <li><%= message %></li>
+  <% end %>
+</ul>
+<% end %>
+
+<%= form_with model: @book, url:'/books', method: :post, local:true do |f| %>
+
+<h4>Title</h4>
+<%= f.text_field :title %>
+
+<h4>Body</h4>
+<%= f.text_area :Opinion %><br>
+
+<%= f.submit 'Create Book' %>
+<% end %>
+
+<h4>Opinion</h4>
+<% @book.each do |book| %>
+<h4>Title</h4>
+  <span><%= link_to book.title, "/books/#{book.id}" %>
+  </span>
+  <h2>Books</h2>
+  <%= book.body %>
+
+
+  <%= link_to "Edit", edit_book_path(book.id) %>
+  <%= link_to "Destroy", destroy_book_path(book.id), method: :delete, "data-confirm" => "Are you Sure？" %>
+
+  <% end %>
