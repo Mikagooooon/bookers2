@@ -1,18 +1,19 @@
 <h2>User info</h2>
 <div>
   <h3><%= @user.name %></h3>
-  <p><%= link_to "プロフィール編集", edit_user</p>
+  <p><%= link_to "プロフィール編集", edit_user_path %></p>
 </div>
 
+<h2>Book detail</h2>
+
 <% @books.each do |book| %>
-<div>
-  <%= link_to book_path(book.id) do %>
-  <% end %>
+  <div>
+    <%= link_to book_path(book.id) do %>
+    <% end %>
 
-  <p>Title:<%= book.title %></p>
-  <p>Opinion:<%= book.body %></p>
-  <p>User:<%= book.user.name</p>
-
+      <p>Title:<%= book.title %></p>
+      <p>Opinion:<%= book.body %></p>
+      <p>User:<%= book.user.name %></p>
   </div>
 <% end %>
 

@@ -1,3 +1,36 @@
+<h2>User info</h2>
+<% @users.each do |user| %>
+
+<h4>name</h4>
+<span><%= user.name %></span>
+
+<h4>introduction</h4>
+<span><%= user.introduction %></span>
+
+<% end %>
+
+<h1>New Book</h1>
+<% if @book.errors.any? %>
+<%= @book.errors.count %> errors prohibited this book form being saved:
+<ul>
+  <% @book.errors.full_messages.each do |message| %>
+  <li><%= message %></li>
+  <% end %>
+</ul>
+<% end %>
+
+<%= form_with model: @book, url:'/books', method: :post, local:true do |f| %>
+
+<h4>Title</h4>
+<%= f.text_field :title %>
+
+<h4>Body</h4>
+<%= f.text_area :body %><br>
+
+<%= f.submit 'Create Book' %>
+<% end %>
+
+
 <h1>Books</h1>
 
 <%= flash[:age] %>
@@ -24,24 +57,3 @@
 </tbody>
 </div>
 </table>
-
-<h1>New Book</h1>
-<% if @book.errors.any? %>
-<%= @book.errors.count %> errors prohibited this book form being saved:
-<ul>
-  <% @book.errors.full_messages.each do |message| %>
-  <li><%= message %></li>
-  <% end %>
-</ul>
-<% end %>
-
-<%= form_with model: @book, url:'/books', method: :post, local:true do |f| %>
-
-<h4>Title</h4>
-<%= f.text_field :title %>
-
-<h4>Body</h4>
-<%= f.text_area :body %><br>
-
-<%= f.submit 'Create Book' %>
-<% end %>
